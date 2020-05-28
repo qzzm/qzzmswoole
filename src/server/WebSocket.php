@@ -67,7 +67,6 @@ class WebSocket
         });
 
         $server->on('workerStart', function (\Swoole\WebSocket\Server $server, int $workerId) {
-//            echo "workerStart事件\n";
             \QzzmEvent::init($workerId, $server);
         });
 
@@ -80,9 +79,7 @@ class WebSocket
             }
         });
 
-
         $server->on('message', function (\Swoole\WebSocket\Server $server, \Swoole\WebSocket\Frame $frame) {
-//            echo "receive from {$frame->fd}:{$frame->data},opcode:{$frame->opcode},fin:{$frame->finish}\n";
             try {
                 if (strtoupper($frame->data) === 'PING') {
                     $server->push($frame->fd, 'PING');
@@ -90,11 +87,6 @@ class WebSocket
                     $requestData = json_decode($frame->data, true);
                     if (isset($requestData['url'])) {
                         $pathArr = explode('/', $requestData['url']);
-//                        $module = $pathArr[1] ?? '';
-//                        $controller = $pathArr[2] ?? '';
-//                        $function = $pathArr[3] ?? '';
-//                        $dir = "\\app\\websocket\\controller\\{$module}\\" . ucfirst(Str::convertUnderline($controller));
-
                         $count = count($pathArr);
                         $pathClass = '';
                         for ($i = 0; $i < $count - 1; $i++) {
@@ -108,8 +100,6 @@ class WebSocket
                         }
                         $dir = "\\app\\websocket\\controller" . $pathClass;
                         $function = $pathArr[$count - 1];
-
-
 
                         if (class_exists($dir)) {
                             $header = ['path' => $requestData['url'], 'token' => $requestData['token'] ?? null];
@@ -126,8 +116,6 @@ class WebSocket
             } catch (\Exception $ex) {
                 $server->push($frame->fd, $ex->getMessage());
             }
-//            $server->push($frame->fd, "this is server");
-            //{"url":"/erp/demand/index","token":"myToken","data":{"id":12}}
         });
 
         if ($isHttp === 1) {
@@ -154,11 +142,6 @@ class WebSocket
                 if ($path !== '/') {
                     try {
                         $pathArr = explode('/', $request->server['request_uri']);
-//                        $module = $pathArr[1] ?? '';
-//                        $controller = $pathArr[2] ?? '';
-//                        $function = $pathArr[3] ?? '';
-//                        $dir = "\\app\\http\\controller\\{$module}\\" . ucfirst(Str::convertUnderline($controller));
-
                         $count = count($pathArr);
                         $pathClass = '';
                         for ($i = 0; $i < $count - 1; $i++) {
@@ -190,11 +173,9 @@ class WebSocket
                             $response->status(404);
                             $response->end();
                             return;
-//                        echo "class `{$dir}` is not exist\n";
                         }
                     } catch (\Exception $ex) {
 //                    throw $ex;
-
                     }
                 } else {
                     $response->status(404);

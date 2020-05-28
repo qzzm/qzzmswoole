@@ -51,9 +51,7 @@ class WebSocketClient
             }
         });
 
-
         if ($this->ret) {
-//            echo "连接成功\n";
             go(function () use ($client) {
                 $this->heartCheck($client, $this->heartCheckTime);
             });
@@ -63,15 +61,9 @@ class WebSocketClient
                     break;
                 }
                 go(function () use ($recv, $client) {
-//                        if ($recv) {
                     $requestData = json_decode($recv->data, true);
                     if (isset($requestData['url'])) {
                         $pathArr = explode('/', $requestData['url']);
-//                        $module = $pathArr[1] ?? '';
-//                        $controller = $pathArr[2] ?? '';
-//                        $function = $pathArr[3] ?? '';
-//                        $dir = "\\app\\client\\controller\\{$module}\\" . ucfirst(Str::convertUnderline($controller));
-
                         $count = count($pathArr);
                         $pathClass = '';
                         for ($i = 0; $i < $count - 1; $i++) {
@@ -86,7 +78,6 @@ class WebSocketClient
                         $dir = "\\app\\client\\controller" . $pathClass;
                         $function = $pathArr[$count - 1];
 
-
                         if (class_exists($dir)) {
                             $class = new $dir($client, $requestData['data'] ?? [], $requestData['fromFd'] ?? 0, $requestData['callbackUrl'] ?? null);
                             if (is_callable([$class, $function])) {
@@ -98,7 +89,6 @@ class WebSocketClient
                             echo "`{$dir}` class is not exist.\n";
                         }
                     }
-//                        }
                 });
             }
         }

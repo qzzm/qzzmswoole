@@ -108,7 +108,6 @@ final class Db
      */
     public function table(string $tableName = '')
     {
-//        $prefix = $this->getTablePrefix();
         $prefix = DbPool::getInstance()->pool($this->mysql)->getTablePrefix();
         $this->tableName = Builder::getInstance()->table($tableName, $prefix, $this->erpId);
         return $this;
@@ -251,7 +250,6 @@ final class Db
     {
         $table = $this->tableName;
         $sql = "SELECT {$this->field} FROM {$table} {$this->join} WHERE {$this->where} {$this->orderBy} {$this->limit};";
-//        var_dump($sql);
         $params = $this->params;
         $mysql = $this->mysql;
         $returnType = $this->returnType;

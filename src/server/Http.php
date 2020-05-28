@@ -78,11 +78,6 @@ class Http
             if ($path !== '/') {
                 try {
                     $pathArr = explode('/', $request->server['request_uri']);
-//                    $module = $pathArr[1] ?? '';
-//                    $controller = $pathArr[2] ?? '';
-//                    $function = $pathArr[3] ?? '';
-//                    $dir = "\\app\\http\\controller\\{$module}\\" . ucfirst(Str::convertUnderline($controller));
-
                     $count = count($pathArr);
                     $pathClass = '';
                     for ($i = 0; $i < $count - 1; $i++) {
@@ -114,11 +109,9 @@ class Http
                         $response->status(404);
                         $response->end();
                         return;
-//                        echo "class `{$dir}` is not exist\n";
                     }
                 } catch (\Exception $ex) {
 //                    throw $ex;
-
                 }
             } else {
                 $response->status(404);
