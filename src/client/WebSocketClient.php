@@ -83,7 +83,7 @@ class WebSocketClient
                                 $pathClass .= "\\{$pathItem}";
                             }
                         }
-                        $dir = "\\app\\http\\controller" . $pathClass;
+                        $dir = "\\app\\client\\controller" . $pathClass;
                         $function = $pathArr[$count - 1];
 
 

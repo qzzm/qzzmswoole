@@ -90,10 +90,26 @@ class WebSocket
                     $requestData = json_decode($frame->data, true);
                     if (isset($requestData['url'])) {
                         $pathArr = explode('/', $requestData['url']);
-                        $module = $pathArr[1] ?? '';
-                        $controller = $pathArr[2] ?? '';
-                        $function = $pathArr[3] ?? '';
-                        $dir = "\\app\\websocket\\controller\\{$module}\\" . ucfirst(Str::convertUnderline($controller));
+//                        $module = $pathArr[1] ?? '';
+//                        $controller = $pathArr[2] ?? '';
+//                        $function = $pathArr[3] ?? '';
+//                        $dir = "\\app\\websocket\\controller\\{$module}\\" . ucfirst(Str::convertUnderline($controller));
+
+                        $count = count($pathArr);
+                        $pathClass = '';
+                        for ($i = 0; $i < $count - 1; $i++) {
+                            if ($i > 0) {
+                                $pathItem = $pathArr[$i];
+                                if ($i === ($count - 2)) {
+                                    $pathItem = ucfirst(Str::convertUnderline($pathItem));
+                                }
+                                $pathClass .= "\\{$pathItem}";
+                            }
+                        }
+                        $dir = "\\app\\websocket\\controller" . $pathClass;
+                        $function = $pathArr[$count - 1];
+
+
 
                         if (class_exists($dir)) {
                             $header = ['path' => $requestData['url'], 'token' => $requestData['token'] ?? null];
