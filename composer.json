@@ -1,0 +1,21 @@
+{
+  "name": "qzzm/qzzmswoole",
+  "description": "qzzm's swoole web framework",
+  "type": "library",
+  "license": "Apache",
+  "authors": [
+    {
+      "name": "Qzzm",
+      "email": "admin@qzzm.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=7.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "qzzm\\qzzmswoole\\": "src/"
+    }
+  }
+}
