@@ -16,7 +16,7 @@
   },
   "autoload": {
     "psr-4": {
-      "qzzm\\qzzmswoole\\": "src/"
+      "qzzm\\": "src/"
     }
   }
 }
