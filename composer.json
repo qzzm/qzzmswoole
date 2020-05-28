@@ -2,7 +2,7 @@
   "name": "qzzm/qzzmswoole",
   "description": "qzzm's swoole web framework",
   "type": "library",
-  "license": "Apache",
+  "license": "apache2",
   "authors": [
     {
       "name": "Qzzm",
