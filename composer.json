@@ -9,7 +9,7 @@
       "email": "admin@qzzm.com"
     }
   ],
-  "minimum-stability": "dev-master",
+  "minimum-stability": "master",
   "require": {
     "php": ">=7.1.0",
     "swoole/ide-helper": "4.4.x"
