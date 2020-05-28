@@ -75,7 +75,7 @@ return [
             'maxRunningNum' => 128,
             'timeout' => 15
         ],
-        'HOT_RELOAD_DIR' => '/app', //开发模式下热重启监听的目录 留空为项目内全部文件(仅限服务启动后加载的文件有效)
+        'HOT_RELOAD_DIR' => '/test', //开发模式下热重启监听的目录 留空为项目内全部文件(仅限服务启动后加载的文件有效)
     ],
     // 客户端配置
     'CLIENT' => [
@@ -88,6 +88,6 @@ return [
         'SETTING' => [
             'worker_num' => 1   //进程数 window下目前建议设置为1
         ],
-        'HOT_RELOAD_DIR' => '/app/client', //开发模式下热重启监听的目录 留空为项目内全部文件(仅限服务启动后加载的文件有效)
+        'HOT_RELOAD_DIR' => '/test/client', //开发模式下热重启监听的目录 留空为项目内全部文件(仅限服务启动后加载的文件有效)
     ],
 ];
