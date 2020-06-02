@@ -104,30 +104,32 @@ final class Builder
                             $random = "{$randomKey}_{$key}";
                             if (strpos($item[0], ".")) {
                                 $field = str_replace('.', '`.`', $item[0]);
+                                $fieldKey = str_replace('.', '_', $item[0]);
                             } else {
                                 $field = $item[0];
+                                $fieldKey = $item[0];
                             }
                             switch (strtoupper($item[1])) {
                                 case 'IN':
-                                    $inList = ":{$item[0]}_{$random}_" . implode(",:{$item[0]}_{$random}_", array_keys($item[2]));
+                                    $inList = ":{$fieldKey}_{$random}_" . implode(",:{$fieldKey}_{$random}_", array_keys($item[2]));
                                     $strWhere .= " {$con} `{$field}` IN({$inList})";
                                     $fieldParams = array_merge($fieldParams, array_combine(explode(",", $inList), $item[2]));
                                     break;
                                 case 'LIKE':
-                                    $strWhere .= " {$con} `{$item[0]}` LIKE CONCAT('%',:{$item[0]}_{$random},'%')";
-                                    $fieldParams[":{$item[0]}_{$random}"] = $item[2];
+                                    $strWhere .= " {$con} `{$item[0]}` LIKE CONCAT('%',:{$fieldKey}_{$random},'%')";
+                                    $fieldParams[":{$fieldKey}_{$random}"] = $item[2];
                                     break;
                                 case 'LIKE%':
-                                    $strWhere .= " {$con} `{$field}` LIKE CONCAT(:{$item[0]}_{$random},'%')";
-                                    $fieldParams[":{$item[0]}_{$random}"] = $item[2];
+                                    $strWhere .= " {$con} `{$field}` LIKE CONCAT(:{$fieldKey}_{$random},'%')";
+                                    $fieldParams[":{$fieldKey}_{$random}"] = $item[2];
                                     break;
                                 case '%LIKE':
-                                    $strWhere .= " {$con} `{$field}` LIKE CONCAT('%',:{$item[0]}_{$random})";
-                                    $fieldParams[":{$item[0]}_{$random}"] = $item[2];
+                                    $strWhere .= " {$con} `{$field}` LIKE CONCAT('%',:{$fieldKey}_{$random})";
+                                    $fieldParams[":{$fieldKey}_{$random}"] = $item[2];
                                     break;
                                 default:
-                                    $strWhere .= " {$con} `{$field}` {$item[1]} :{$item[0]}_{$random}";
-                                    $fieldParams[":{$item[0]}_{$random}"] = $item[2];
+                                    $strWhere .= " {$con} `{$field}` {$item[1]} :{$fieldKey}_{$random}";
+                                    $fieldParams[":{$fieldKey}_{$random}"] = $item[2];
                                     break;
                             }
                         }
