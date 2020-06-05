@@ -1,7 +1,7 @@
 <?php
 
-use qzzm\orm\Config;
-use qzzm\orm\DbPool;
+use qzzm\mysql\Config;
+use qzzm\mysql\DbPool;
 use qzzm\lib\Config as rConfig;
 
 final class QzzmEvent

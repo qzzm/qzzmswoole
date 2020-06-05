@@ -4,7 +4,7 @@
 namespace app\http\controller;
 
 
-use qzzm\orm\Db;
+use qzzm\mysql\Db;
 
 class Index extends AController
 {

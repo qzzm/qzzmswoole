@@ -1,7 +1,7 @@
 <?php
 
 
-namespace qzzm\orm;
+namespace qzzm\mysql;
 
 use PDO;
 use qzzm\lib\Log;
