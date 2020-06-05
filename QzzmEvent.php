@@ -1,8 +1,6 @@
 <?php
 
-use qzzm\mysql\Config;
-use qzzm\mysql\DbPool;
-use qzzm\utlis\Config as rConfig;
+use qzzm\factory\Register;
 
 final class QzzmEvent
 {
@@ -23,30 +21,7 @@ final class QzzmEvent
      */
     static function init(int $pid, Swoole\Http\Server $server)
     {
-        $val = rConfig::getInstance()->get('MYSQL.MYSQL1.host');
-//        var_dump($val);
-
-        DbPool::getInstance()->addConnection(
-            Config::getInstance()
-                ->setHost('127.0.0.1')
-                ->setDbName('erp')
-                ->setUserName('root')
-                ->setPassword('root')
-                ->setPrefix('qzzm_')
-                ->setCharset('utf8mb4'),
-            'mysql'
-        );
-
-        DbPool::getInstance()->addConnection(
-            Config::getInstance()
-                ->setHost('127.0.0.1')
-                ->setDbName('erp1')
-                ->setUserName('root')
-                ->setPassword('root')
-                ->setPrefix('qzzm_')
-                ->setCharset('utf8mb4'),
-            'mysql1'
-        );
+        Register::getInstance()->mysql();
     }
 
     /**
@@ -57,10 +32,7 @@ final class QzzmEvent
      */
     static function onRequest(Swoole\Http\Request $request, Swoole\Http\Response $response)
     {
-        $response->setHeader('Access-Control-Allow-Origin', '*');
-        $response->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-//        $response->withHeader('Access-Control-Allow-Credentials', 'true');
-        $response->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, XMLHttpRequestUpload, Qzzm-Token, Qzzm-Domain, Qzzm-Action');
+        Register::getInstance()->cross($request, $response);
 
         if ($request->server['request_method'] === 'OPTIONS') {
             $response->status(200);

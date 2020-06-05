@@ -5,22 +5,24 @@ return [
     'MODE' => 0,
     // mysql配置
     'MYSQL' => [
-        'MYSQL1' => [
+        [
+            'pool' => 'mysql',
             'host' => 'localhost',
             'port' => 3306,
             'db' => 'tukebbs',
             'user' => 'root',
             'password' => 'root',
-            'chatset' => 'utf8mb4',
+            'charset' => 'utf8mb4',
             'prefix' => 'qzzm_',
         ],
-        'MYSQL2' => [
+        [
+            'pool' => 'mysql1',
             'host' => 'localhost',
             'port' => 3306,
             'db' => 'erp1',
             'user' => 'root',
             'password' => 'root',
-            'chatset' => 'utf8mb4',
+            'charset' => 'utf8mb4',
             'prefix' => 'qzzm_',
         ],
     ],
@@ -34,16 +36,16 @@ return [
     //跨域及请求处理
     'CROSS' => [
         // 允许域名
-        'DOMAINS' => ['*'],
+        'domains' => ['*'],
         // 允许方法
-        'METHODS' => [
+        'methods' => [
             'GET',
             'POST',
             'OPTIONS',
             'PUT'
         ],
         // 允许请求头
-        'HEADERS' => [
+        'headers' => [
             'Qzzm-Token',
             'Qzzm-Domain',
             'Qzzm-Action',
