@@ -4,8 +4,8 @@
 namespace qzzm\validate;
 
 
-use qzzm\lib\Log;
-use qzzm\lib\Singleton;
+use qzzm\utlis\Log;
+use qzzm\utlis\Singleton;
 
 class Validate
 {

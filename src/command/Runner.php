@@ -2,7 +2,7 @@
 
 namespace qzzm\command;
 
-use qzzm\lib\Singleton;
+use qzzm\utlis\Singleton;
 use qzzm\server\Http;
 use qzzm\server\WebSocket;
 

@@ -3,8 +3,8 @@
 
 namespace qzzm\client;
 
-use qzzm\lib\Singleton;
-use qzzm\lib\Str;
+use qzzm\utlis\Singleton;
+use qzzm\utlis\Str;
 
 class WebSocketClient
 {

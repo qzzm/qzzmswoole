@@ -4,7 +4,7 @@
 namespace qzzm\cache;
 
 
-use qzzm\lib\Singleton;
+use qzzm\utlis\Singleton;
 use Swoole\Table;
 
 class RAM

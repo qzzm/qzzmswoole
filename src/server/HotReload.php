@@ -14,7 +14,7 @@
 
 namespace qzzm\server;
 
-use qzzm\lib\Singleton;
+use qzzm\utlis\Singleton;
 use Swoole\Table;
 use Swoole\Timer;
 

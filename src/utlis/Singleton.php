@@ -1,7 +1,7 @@
 <?php
 
 
-namespace qzzm\lib;
+namespace qzzm\utlis;
 
 trait Singleton
 {

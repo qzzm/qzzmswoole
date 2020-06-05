@@ -4,7 +4,7 @@
 namespace qzzm\mysql;
 
 
-use qzzm\lib\Singleton;
+use qzzm\utlis\Singleton;
 use Swoole\Database\PDOConfig;
 use Swoole\Database\PDOPool;
 use Swoole\Database\PDOProxy;

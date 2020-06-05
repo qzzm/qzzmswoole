@@ -5,9 +5,9 @@ namespace qzzm\server;
 
 require_once QZZM_ROOT . '/QzzmEvent.php';
 
-use qzzm\lib\Singleton;
-use qzzm\lib\System;
-use qzzm\lib\Str;
+use qzzm\utlis\Singleton;
+use qzzm\utlis\System;
+use qzzm\utlis\Str;
 
 class Http
 {

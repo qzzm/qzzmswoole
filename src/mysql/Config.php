@@ -3,7 +3,7 @@
 
 namespace qzzm\mysql;
 
-use qzzm\lib\Singleton;
+use qzzm\utlis\Singleton;
 
 final class Config
 {

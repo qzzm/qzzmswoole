@@ -3,7 +3,7 @@
 
 namespace qzzm\client\model;
 
-use qzzm\lib\JsonSerialize;
+use qzzm\utlis\JsonSerialize;
 
 class OrderResult extends JsonSerialize
 {

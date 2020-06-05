@@ -4,7 +4,7 @@
 namespace qzzm\server\model;
 
 
-use qzzm\lib\JsonSerialize;
+use qzzm\utlis\JsonSerialize;
 
 class OrderResult extends JsonSerialize
 {

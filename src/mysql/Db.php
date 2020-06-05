@@ -4,8 +4,8 @@
 namespace qzzm\mysql;
 
 use PDO;
-use qzzm\lib\Log;
-use qzzm\lib\Singleton;
+use qzzm\utlis\Log;
+use qzzm\utlis\Singleton;
 use qzzm\validate\Validate;
 use Swoole\Coroutine;
 use Swoole\Database\PDOConfig;

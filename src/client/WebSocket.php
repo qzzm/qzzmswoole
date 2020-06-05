@@ -4,9 +4,9 @@ namespace qzzm\client;
 
 require_once QZZM_ROOT . '/QzzmClientEvent.php';
 
-use qzzm\lib\Singleton;
-use qzzm\lib\Str;
-use qzzm\lib\System;
+use qzzm\utlis\Singleton;
+use qzzm\utlis\Str;
+use qzzm\utlis\System;
 
 class WebSocket
 {

@@ -2,7 +2,7 @@
 
 use qzzm\mysql\Config;
 use qzzm\mysql\DbPool;
-use qzzm\lib\Config as rConfig;
+use qzzm\utlis\Config as rConfig;
 
 final class QzzmEvent
 {
@@ -24,7 +24,7 @@ final class QzzmEvent
     static function init(int $pid, Swoole\Http\Server $server)
     {
         $val = rConfig::getInstance()->get('MYSQL.MYSQL1.host');
-        var_dump($val);
+//        var_dump($val);
 
         DbPool::getInstance()->addConnection(
             Config::getInstance()
