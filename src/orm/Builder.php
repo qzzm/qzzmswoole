@@ -62,9 +62,13 @@ final class Builder
         return $resField;
     }
 
-    public function join(string $tableName, string $prefix, int $erpId, string $on, string $type)
+    public function join(string $tableName, string $prefix, int $erpId, string $on, string $type, bool $isRaw = false)
     {
-        $joinTable = $this->table($tableName, $prefix, $erpId);
+        if ($isRaw) {
+            $joinTable = $tableName;
+        } else {
+            $joinTable = $this->table($tableName, $prefix, $erpId);
+        }
         $on = str_replace('.', '`.`', $on);
         $on = str_replace('=', '`=`', $on);
         return " {$type} JOIN {$joinTable} ON `{$on}`";
@@ -86,11 +90,13 @@ final class Builder
                             //处理字段为 'a.id' 这种情况问题
                             if (strpos($key, ".")) {
                                 $field = str_replace('.', '`.`', $key);
+                                $fieldKey = str_replace('.', '_', $key);
                             } else {
                                 $field = $key;
+                                $fieldKey = $key;
                             }
-                            array_push($wfields, "`{$field}`=:{$key}_{$randomKey}");
-                            $fieldParams[":{$key}_{$randomKey}"] = $val;
+                            array_push($wfields, "`{$field}`=:{$fieldKey}_{$randomKey}");
+                            $fieldParams[":{$fieldKey}_{$randomKey}"] = $val;
                         }
                         $strWhere = " AND " . implode(' AND ', $wfields);
                     } else {

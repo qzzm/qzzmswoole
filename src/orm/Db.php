@@ -158,10 +158,14 @@ final class Db
         return $this;
     }
 
-    public function join(string $tableName, string $on, string $type = 'INNER'): Db
+    public function join(string $tableName, string $on, string $type = 'INNER', $isRaw = false): Db
     {
-        $prefix = $this->getTablePrefix();
-        $join = Builder::getInstance()->join($tableName, $prefix, $this->erpId, $on, $type);
+        if ($isRaw) {
+            $prefix = '';
+        } else {
+            $prefix = DbPool::getInstance()->pool($this->mysql)->getTablePrefix();
+        }
+        $join = Builder::getInstance()->join($tableName, $prefix, $this->erpId, $on, $type, $isRaw);
         $this->join .= $join;
         return $this;
     }
@@ -228,8 +232,8 @@ final class Db
             $field = $field !== '*' ? "`{$field}`" : '*';
         }
         $table = $this->tableName;
-
-        $sql = "SELECT COUNT({$field}) AS `count` FROM {$table} {$this->join} WHERE {$this->where} {$this->groupBy};";
+        $where = $this->where !== '1=1' ? ' WHERE ' . $this->where : '';
+        $sql = "SELECT COUNT({$field}) AS `count` FROM {$table} {$this->join} {$where} {$this->groupBy};";
         $params = $this->params;
         $mysql = $this->mysql;
         $this->reset();
@@ -249,7 +253,8 @@ final class Db
     public function select(string $poolName = 'mysql'): Result
     {
         $table = $this->tableName;
-        $sql = "SELECT {$this->field} FROM {$table} {$this->join} WHERE {$this->where} {$this->orderBy} {$this->limit};";
+        $where = $this->where !== '1=1' ? ' WHERE ' . $this->where : '';
+        $sql = "SELECT {$this->field} FROM {$table} {$this->join} {$where} {$this->orderBy} {$this->limit};";
         $params = $this->params;
         $mysql = $this->mysql;
         $returnType = $this->returnType;
@@ -265,7 +270,8 @@ final class Db
     public function find(): Result
     {
         $table = $this->tableName;
-        $sql = "SELECT {$this->field} FROM {$table} {$this->join} WHERE {$this->where} {$this->orderBy} LIMIT 1;";
+        $where = $this->where !== '1=1' ? ' WHERE ' . $this->where : '';
+        $sql = "SELECT {$this->field} FROM {$table} {$this->join} {$where} {$this->orderBy} LIMIT 1;";
         $params = $this->params;
         $mysql = $this->mysql;
         $returnType = $this->returnType;
